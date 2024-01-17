@@ -1,0 +1,998 @@
+#include <math.h>
+#include <stdio.h>
+/*
+UUP-KLK2-2122-G3.
+matrice.
+4 5
+1 2 2 2
+6 3 1 1
+5 8 1 1
+6 3 3 1
+7 2 1 2
+
+int main(){
+    int n,k,temp;
+    scanf("%d %d",&k,&n);
+    int mat[10][10];
+    int i,j;
+    for(i=0;i<n;i++){
+        for(j=0;j<k;j++){
+            int broj;
+            scanf("%d",&broj);
+            mat[i][j]=broj;
+        }
+    }
+            printf("\n");
+    for(j=0;j<k;j++){
+        int brojac=0;
+        int najveci=-99;
+        for(i=0;i<n;i++){
+            if(mat[i][j]==mat[n-i-1][j]){
+                brojac++;
+
+            }
+            if(mat[i][j]>najveci){
+                najveci=mat[i][j];
+            }
+            if(najveci>n){
+                najveci=najveci%n;
+            }
+        }
+        if(brojac==n-1){
+
+        }
+        else{
+            for (i = 0; i < najveci % n; i++) {
+                temp = mat[n - 1][j];
+                for (int z = n - 1; z > 0; z--) {
+                    mat[z][j] = mat[z - 1][j];
+                }
+                mat[0][j] = temp;
+            }
+
+        }
+    }
+
+    for(i=0;i<n;i++){
+        for(j=0;j<k;j++){
+            printf("%d ",mat[i][j]);
+        }
+        printf("\n");
+    }
+return 0;
+}
+*/
+/*
+UUP-KLK2-2021-G2.
+matrice.
+nes cudno ima;
+4
+2 6 1 4
+3 5 6 8
+4 1 8 0
+9 6 3 7
+
+int main(){
+ int n;
+ scanf("%d",&n);
+ int i,j;
+ int mat[10][10];
+ int mat2[10][10];
+ for(i=0;i<n;i++){
+    for(j=0;j<n;j++){
+        int broj;
+        scanf("%d",&broj);
+        mat[i][j]=broj;
+        mat2[i][j]=broj;
+    }
+ }
+ int neko_brojce=n/2+1;
+ int neko_brojce2=1;
+ for(i=0;i<n;i++){
+    for(j=0;j<n;j++){
+        if(i==j && j<n/2){
+            int temp=mat[i+neko_brojce][j];
+            mat[i+neko_brojce][j]=mat[i][j];
+            mat[i][j]=temp;
+            neko_brojce=neko_brojce-2;
+        }
+        else if(i==j && j>=n/2){
+             int temp=mat[i-neko_brojce2][j];
+             mat[i-neko_brojce2][j]=mat[i][j];
+             mat[i][j]=temp;
+             neko_brojce2=neko_brojce2+2;
+        }
+        else if(i+j==n-1){
+
+        }
+        else{
+            int najveci=-999;
+            if(mat2[i-1][j]>najveci && mat2[i-1][j] %2==0){najveci=mat2[i-1][j];}
+            else if(mat2[i+1][j]>najveci && mat2[i+1][j]%2==0){najveci=mat2[i+1][j];}
+            else if(mat2[i][j+1]>najveci && mat2[i][j+1]%2==0){najveci=mat2[i][j+1];}
+            else if(mat2[i][j-1]>najveci && mat2[i][j-1]%2==0){najveci=mat2[i][j-1];}
+
+
+            if(najveci==-999){
+                mat[i][j]=0;
+            }
+            else{
+                mat[i][j]=najveci;
+            }
+        }
+
+    }
+ }
+ printf("\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%d ", mat[i][j]);
+        }
+        printf("\n");
+    }
+return 0;
+}
+*/
+/*
+UUP-KLK2-2021-G1.
+matrice.
+*/
+/*
+6 8
+3 2 6 4 5 8
+7 4 3 2 7 1
+0 5 6 9 2 3
+0 7 9 4 9 4
+9 2 2 9 4 9
+4 3 2 4 3 2
+
+int main(){
+    int n,k;
+    scanf("%d %d",&n,&k);
+    int i,j;
+    int mat[10][10];
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            int broj;
+            scanf("%d",&broj);
+            mat[i][j]=broj;
+        }
+    }
+    printf("\n");
+     int limit=2*n+2*(n-1);//broj brojeva u prvi prsten
+    ///granice
+
+
+    for(int o=0;o<k;o++){
+        int leva=0;
+        int desna=n-1;
+        int gornja=0;
+        int donja=n-1;
+        int novamat[10][10]={};
+        for(int z=0;z<n/2;z++){
+            for(i=0;i<n;i++){
+                for(j=0;j<n;j++){
+                        if(j==leva && i<donja && i>=gornja){
+                            novamat[i][j]=mat[i+1][j];
+                        }
+                        else if(i==gornja && j>leva && j<=desna ){
+                            novamat[i][j]=mat[i][j-1];
+                        }
+                        else if(j==desna && i>gornja && i<=donja){
+                            novamat[i][j]=mat[i-1][j];
+                        }
+                        else if(i==donja && j<desna && j>=leva){
+                            novamat[i][j]=mat[i][j+1];
+                        }
+
+
+                    mat[i][j]=mat[i][j];
+                }
+            }
+        gornja++;
+        leva++;
+        desna--;
+        donja--;
+        }
+        for(i=0;i<n;i++){
+            for(j=0;j<n;j++){
+                mat[i][j]=novamat[i][j];
+            }
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%d ", mat[i][j]);
+        }
+        printf("\n");
+    }
+return 0;
+}
+*/
+/*
+UUP-KLK2-1920-G4.
+matrice.
+
+int main(){
+    int n;
+    int mat[10][10];
+    int niz[50]={};
+    scanf("%d",&n);
+    int i,j;
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            int broj;
+            scanf("%d",&broj);
+            mat[i][j]=broj;
+        }
+    }
+    int broj;
+    int smer=0;
+    int brojac=1;
+    int najvise=-1;
+    int k=0;
+    for(i=0;i<n;i++){
+
+        if(smer%2==0){
+            for(j=0;j<n;j++){
+                niz[k]=mat[i][j];
+                k++;
+            }
+        }
+        else{
+            for(j=n-1;j>=0;j--){
+                niz[k]=mat[i][j];
+                k++;
+            }
+        }
+        smer++;
+    }
+    for(i=0;i<k;i++){
+        if(niz[i]==niz[i-1]+1){
+            brojac++;
+        }
+        else{
+            if(brojac>najvise){
+                najvise=brojac;
+            }
+            brojac=1;
+        }
+    }
+printf("%d",najvise);
+return 0;
+}
+*/
+/*
+UUP-KLK2-1920-G3.
+matrice.
+4
+3 4 1 6
+1 2 9 1
+5 6 6 1
+2 3 1 1
+
+int main(){
+    int n;
+    int mat[10][10];
+    int niz[50]={};
+    scanf("%d",&n);
+    int i,j;
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            int broj;
+            scanf("%d",&broj);
+            mat[i][j]=broj;
+        }
+    }
+    int broj;
+    int smer=0;
+    int brojac=1;
+    int najvise=-1;
+    int k=0;
+    for(j=0;j<n;j++){
+
+        if(smer%2==0){
+            for(i=0;i<n;i++){
+                niz[k]=mat[i][j];
+                k++;
+            }
+        }
+        else{
+            for(i=n-1;i>=0;i--){
+                niz[k]=mat[i][j];
+                k++;
+            }
+        }
+        smer++;
+    }
+    for(i=0;i<k;i++){
+        if(niz[i]==niz[i-1]){
+            brojac++;
+        }
+        else{
+            if(brojac>najvise){
+                najvise=brojac;
+            }
+            brojac=1;
+        }
+    }
+printf("%d",najvise);
+return 0;
+}
+*/
+/*
+UUP-KLK2-1920-G1.
+matrice.
+LOSE
+
+int main() {
+    int n, m;
+    scanf("%d %d", &n, &m);
+    int mat[m][m];
+    int top = 0, bottom = m - 1, left = 0, right = m - 1;
+    int broj = n;
+    while (top <= bottom && left <= right) {
+        for (int j = left; j < right; j++) {
+            mat[top][j] = broj;
+        }
+        broj++;
+        if(broj>9){
+            broj=broj%10;
+        }
+        top++;
+        for (int i = top-1; i < bottom; i++) {
+            mat[i][right] = broj;
+        }
+        right--;
+
+        broj++;
+                if(broj>9){
+            broj=broj%10;
+        }
+        if (top <= bottom) {
+            for (int j = right-1; j > left; j--) {
+                mat[bottom][j] = broj;
+            }
+            bottom--;
+            broj++;
+                    if(broj>9){
+            broj=broj%10;
+        }
+        }
+        if (left <= right) {
+            for (int i = bottom-1; i > top; i--) {
+                mat[i][left] = broj;
+            }
+            left++;
+            broj++;
+            if(broj>9){
+            broj=broj%10;
+        }
+        }
+    }
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < m; j++) {
+            printf("%d ", mat[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+*/
+/*
+UUP-KLK2-1819-G4.
+matrice.
+bukv uradjen samo ima 1000 slucaja i mrzi me da pisem sve
+
+int main(){
+    int mat[10][10];
+    int n;
+    scanf("%d",&n);
+    int i,j;
+    int broj1,broj2;
+
+    int novamat[10][10]={};
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            int broj;
+            scanf("%d",&broj);
+            mat[i][j]=broj;
+        }
+    }
+    printf("\n");
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            int min_kolone=999;
+            int max_vrste=-999;
+            if(i==0){
+                for(int z=0;z<n;z++){
+                    if(mat[z][j-1]<min_kolone){
+                        min_kolone=mat[z][j-1];
+                    }
+                }
+                for(int z=0;z<n;z++){
+                    if(mat[z][j+1]<min_kolone){
+                        min_kolone=mat[z][j+1];
+                    }
+                }
+                for(int z=0;z<n;z++){
+                    if(mat[i+1][z]>max_vrste){
+                        max_vrste=mat[i+1][z];
+                    }
+                }
+            }
+            for(int z=0;z<n;z++){
+                if(mat[z][j-1]<min_kolone){
+                    min_kolone=mat[z][j-1];
+                }
+            }
+            for(int z=0;z<n;z++){
+                if(mat[z][j+1]<min_kolone){
+                    min_kolone=mat[z][j+1];
+                }
+            }
+            for(int z=0;z<n;z++){
+                if(mat[i-1][z]>max_vrste){
+                    max_vrste=mat[i-1][z];
+                }
+            }
+            for(int z=0;z<n;z++){
+                if(mat[i+1][z]>max_vrste){
+                    max_vrste=mat[i+1][z];
+                }
+            }
+            novamat[i][j]=abs(min_kolone-max_vrste);
+        }
+    }
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            printf("%d ",novamat[i][j]);
+        }
+        printf("\n");
+    }
+return 0;
+}
+*/
+/*
+UUP-KLK2-1819-G3.
+matrice.
+
+
+
+3
+5 3 7
+3 5 1
+2 1 3
+
+int main(){
+    int mat[10][10];
+    int n;
+    scanf("%d",&n);
+    int i,j;
+    int broj1,broj2;
+
+    int novamat[10][10]={};
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            int broj;
+            scanf("%d",&broj);
+            mat[i][j]=broj;
+        }
+    }
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            int najveci_broj=-999;
+                for(int k=0;k<n;k++){
+                    for(int z=0;z<n;z++){
+                        if(k!=i && z!=j){
+                            if(mat[k][z]>najveci_broj){
+                                najveci_broj=mat[k][z];
+                            }
+                        }
+                    }
+                }
+            novamat[i][j]=mat[i][j]+najveci_broj;
+
+        }
+    }
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            printf("%d ",novamat[i][j]);
+        }
+        printf("\n");
+    }
+return 0;
+}
+*/
+/*
+UUP-KLK2-1819-G2.
+matrice.
+Samo pun k ifovi mrzi me
+
+int main(){
+    int mat[10][10];
+    int n;
+    scanf("%d",&n);
+    int i,j;
+    int broj1,broj2;
+    int novamat[10][10]={};
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            int broj;
+            scanf("%d",&broj);
+            mat[i][j]=broj;
+        }
+    }
+    for(i=0;i<n;i++){
+        for(j=0;j<n;j++){
+            if(i==0 && j==0 ){
+                novamat[i][j]=mat[i+1][j]+mat[i][j+1]-mat[i][i];
+            }
+            else if(i==0 && j<n-1 && i<n-1){
+                novamat[i][j]=mat[i+1][j]+mat[i][j+1]
+            }
+
+            else{
+                novamat[i][j]=mat[i-1][j-1]+mat[i+1][j-1]+mat[i+1][j+1]+mat[i-1][j+1]-mat[i][j];
+            }
+
+            printf("%d ",novamat[i][j]);
+        }
+        printf("\n");
+    }
+
+
+return 0;
+}
+*/
+/*
+UUP-KLK2-1819-G1.
+matrice.
+int main(){
+    int mat[10][10]={};
+    int i,j,n;
+    scanf("%d",&n);
+    for(i=0;i<n;i++){ ///uNosi matricu
+        for(j=0;j<n;j++){
+            int broj;
+            scanf("%d",&broj);
+            mat[i][j]=broj;
+        }
+    }
+    for(i=0;i<n;i++){ ///Resava vrste
+        int brojac1=0;
+        int najveci_broj_neparan=-999;
+        for(j=0;j<n;j++){
+            if(mat[i][j]>najveci_broj_neparan && mat[i][j]%2==1){
+                najveci_broj_neparan=mat[i][j];
+            }
+            if(j==n-1){
+                for(int z=0;z<n;z++){
+                    if(mat[i][z]==najveci_broj_neparan){
+                        brojac1++;
+                    }
+                }
+            }
+
+
+        }
+        printf("red %d: %d %d \n",i,najveci_broj_neparan,brojac1);
+    }
+    for(j=0;j<n;j++){   ///Resava kolone
+        int najmanji_paran=9999;
+        int brojac2=0;
+        for(i=0;i<n;i++){
+            if(mat[i][j]<najmanji_paran &&mat[i][j]%2==0){
+                najmanji_paran=mat[i][j];
+            }
+
+            if(i==n-1){
+                for(int z=0;z<n;z++){
+                    if(mat[z][j]==najmanji_paran){
+                        brojac2++;
+                    }
+                }
+            }
+
+        }
+        if(najmanji_paran==9999){
+
+        }
+        else{
+            printf("kolona %d: %d %d \n",j,najmanji_paran,brojac2);
+        }
+
+    }
+
+return 0;
+}
+*/
+/*
+UUP-KLK2-1718-G4.
+matrice.
+
+int duzina(int a){
+    int brojac=0;
+    while(a){
+        brojac++;
+        a=a/10;
+    }
+return brojac;
+}
+int obrni(int a){
+    int broj=0;
+    while(a){
+        broj=broj*10+a%10;
+        a=a/10;
+    }
+    return broj;
+}
+int main(){
+    int n;
+    int mat[10][10];
+    scanf("%d",&n);
+    int k=duzina(n);
+    int n_obrnut=obrni(n);
+    int broj1,broj2,broj3;
+    int i,j;
+    for(i=0;i<k;i++){
+        broj1=n/(int)pow(10,duzina(n)-i-1)%10;
+        for(j=0;j<k;j++){
+            if(i==j || (i+j==k-1)){
+                mat[i][j]=broj1;
+            }
+            else if(i<j &&(i+j<k-1)){
+                mat[i][j]=10+mat[i][j];
+                mat[i][j]=broj1-1;
+            }
+            else if(i>j &&(i+j>k-1)){
+                mat[i][j]=broj1-1;
+                if(mat[i][j]<0){
+                    mat[i][j]=10+mat[i][j];
+                }
+            }
+            else{
+                mat[i][j]=broj1+1;
+                if(mat[i][j]>9){
+                    mat[i][j]=mat[i][j]%10;
+                }
+            }
+
+
+        }
+    }
+    for(i=0;i<k;i++){
+        for(j=0;j<k;j++){
+            printf("%d ",mat[i][j]);
+        }
+        printf("\n");
+    }
+
+
+
+    return 0;
+}
+*/
+/*
+UUP-KLK2-1718-G3.
+matrice.
+
+int duzina(int a){
+    int brojac=0;
+    while(a){
+        brojac++;
+        a=a/10;
+    }
+return brojac;
+}
+int obrni(int a){
+    int broj=0;
+    while(a){
+        broj=broj*10+a%10;
+        a=a/10;
+    }
+    return broj;
+}
+int main(){
+    int n;
+    int mat[10][10];
+    scanf("%d",&n);
+    int k=duzina(n);
+    int n_obrnut=obrni(n);
+    int broj1,broj2,broj3;
+    int i,j;
+
+    for(j=0;j<k;j++){
+        broj1=n/(int)pow(10,duzina(n)-j-1)%10;
+        broj2=n_obrnut/(int)pow(10,duzina(n)-j-1)%10;
+        for(i=0;i<k;i++){
+            if(i==j){
+                mat[i][j]=broj2;
+            }
+            else if(i+j==k-1){
+                mat[i][j]=broj2;
+            }
+            else if(i>j &&(i+j<n-1)){
+                mat[i][j]=broj2+1;
+            }
+            else if(i<j && (i+j>n-1)){
+                mat[i][j]=broj1+1;
+            }
+            else if(i<j&&(i+j<n-1)){
+                mat[i][j]=broj2-1;
+                if(mat[i][j]<0){
+                    mat[i][j]=10+mat[i][j];
+                }
+            }
+            else{
+                mat[i][j]=0; // Iz nekog razloga mi nece da da pravim donji trougao, tuzan emoji
+            }
+
+        }
+    }
+    for(i=0;i<k;i++){
+        for(j=0;j<k;j++){
+            printf("%d ",mat[i][j]);
+        }
+        printf("\n");
+    }
+
+
+return 0;
+}
+*/
+/*
+UUP-KLK2-1718-G2.
+matrice.
+
+int duzina(int a){
+    int brojac=0;
+    while(a){
+        brojac++;
+        a=a/10;
+    }
+return brojac;
+}
+int main(){
+    int mat[10][10]={};
+    int n,i,j;
+    scanf("%d",&n);
+    int broj,broj2,broj3;
+if(duzina(n)%2==1){
+    for(j=0;j<duzina(n);j++){
+        broj=n/(int)pow(10,duzina(n)-j-1)%10;
+        broj2=broj+(duzina(n)/2)/2;
+        broj3=broj;
+        if(broj2>9){
+            broj2=broj2%10;
+        }
+        int brojac1=0;
+        int brojac2=0;
+        for(i=0;i<duzina(n);i++){
+            if(i==duzina(n)/2){
+                mat[i][j]=broj;
+            }
+            else if(i<duzina(n)/2){
+                if(brojac1%2==0){
+                    brojac1++;
+                    mat[i][j]=broj2;
+                }
+                else{
+                    brojac1++;
+                    mat[i][j]=broj2;
+                }
+            }
+            else if(i>duzina(n)/2){
+                if(brojac2%2==0){
+                    brojac2++;
+                    mat[i][j]=broj3;
+                    broj3--;
+                    if(broj3<0){
+                        broj3=10+broj3;
+                    }
+
+                }
+                else{
+                    brojac2++;
+                    mat[i][j]=broj3;
+
+                }
+            }
+
+        }
+    }
+}
+else{ //za parni
+        for(j=0;j<duzina(n);j++){
+        broj=n/(int)pow(10,duzina(n)-j-1)%10;
+        broj2=broj+(duzina(n)/2)/2;
+        broj3=broj-1;
+        if(broj2>9){
+            broj2=broj2%10;
+        }
+        int brojac1=0;
+        int brojac2=0;
+        for(i=0;i<duzina(n);i++){
+            if(i==duzina(n)/2 || i==duzina(n)/2-1){
+                mat[i][j]=broj;
+            }
+            else if(i<duzina(n)/2){
+                if(brojac1%2==0){
+                    brojac1++;
+                    mat[i][j]=broj2;
+                }
+                else{
+                    brojac1++;
+                    mat[i][j]=broj2;
+                }
+            }
+            else if(i>duzina(n)/2){
+                if(brojac2%2==0){
+                    brojac2++;
+                    mat[i][j]=broj3;
+                    broj3--;
+                    if(broj3<0){
+                        broj3=10+broj3;
+                    }
+
+                }
+                else{
+                    brojac2++;
+                    mat[i][j]=broj3;
+
+                }
+            }
+
+        }
+    }
+}
+    for(i=0;i<duzina(n);i++){
+        for(j=0;j<duzina(n);j++){
+            printf("%d ",mat[i][j]);
+        }
+        printf("\n");
+    }
+return 0;
+}
+*/
+/*
+UUP-KLK2-1718-G1.
+matrice.
+
+int duzina(int a){
+    int brojac=0;
+    while(a){
+        brojac++;
+        a=a/10;
+    }
+return brojac;
+}
+int main(){
+    int n,i,j;
+    int broj, broj2;
+    int mat[10][10]={};
+
+    scanf("%d",&n);
+    for(i=0;i<duzina(n);i++){
+            broj=n/(int)pow(10,duzina(n)-i-1)%10;
+            broj2=broj-(duzina(n)-i)/2;
+            int brojac=0;
+            if(broj2<0){
+                broj2=10+broj2;
+            }
+            for(j=0;j<duzina(n);j++){
+                if(i+j==duzina(n)-1){
+
+                    mat[i][j]=broj;
+                }
+                else if(i+j<duzina(n)-1){
+
+                    if((duzina(n)-i-1)%2==0){
+                        if(j%2==0){
+                            mat[i][j]=broj2;
+                        }
+                        else{
+                            mat[i][j]=broj2;
+                            broj2++;
+                        }
+                    }
+                    else{
+                        if(j%2==0){
+                            mat[i][j]=broj2;
+                            broj2++;
+                        }
+                        else{
+                            mat[i][j]=broj2;
+                        }
+                    }
+
+                }
+                else{
+
+                    if(broj>9){
+                        broj=broj%9;
+                    }
+                    if (brojac%2==0){
+                        mat[i][j]=broj;
+                        brojac++;
+                        broj++;w
+                    }
+                    else{
+                        mat[i][j]=broj;
+                        brojac++;
+
+                    }
+                }
+
+            }
+    }
+    for(i=0;i<duzina(n);i++){
+        for(j=0;j<duzina(n);j++){
+            printf("%d ",mat[i][j]);
+        }
+        printf("\n");
+    }
+return 0;
+}
+*/
+/*
+UUP-KLK2-1617-G2
+matrice
+bukv isti smaranje
+*/
+
+/*
+UUP-KLK2-1617-G1
+matrice
+
+int duzina(int a){
+    int brojac=0;
+    while(a){
+        brojac++;
+        a=a/10;
+    }
+return brojac;
+}
+int main(){
+    int n;
+    scanf("%d",&n);
+    int mat[10][10]={};
+    int i,j;
+
+    for(i=0;i<duzina(n);i++){
+        for(j=0;j<duzina(n);j++){
+            if(i==0){
+                mat[i][j]=n/(int)pow(10,duzina(n)-j-1)%10;
+
+            }
+            else if(i%2==0){
+                if(mat[i-1][j]-2<0){
+                    mat[i][j]=8-mat[i-1][j];
+                }
+                else{
+                mat[i][j]=mat[i-1][j]-2;
+                }
+            }
+            else{
+                if(mat[i-1][j]-1<0){
+                    mat[i][j]=8-mat[i-1][j];
+                }
+                else{
+                mat[i][j]=mat[i-1][j]-1;
+                }
+            }
+        }
+    }
+    for(i=0;i<duzina(n);i++){
+        for(j=0;j<duzina(n);j++){
+            printf("%d ",mat[i][j]);
+        }
+        printf("\n");
+    }
+
+
+return 0;
+}
+*/
