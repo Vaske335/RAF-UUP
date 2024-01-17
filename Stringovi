@@ -1,0 +1,707 @@
+#include <string.h>
+#include <stdio.h>
+#include <math.h>
+#include <ctype.h>
+
+
+/*
+UUP-KLK2-2021-G2;
+
+int main(){
+    char str[10000];
+    fgets(str,sizeof(str),stdin);
+    int i,j;
+    int duzina=strlen(str);
+    char novistring[100]="";
+    int najmanje=999;
+
+    for(i=0;i<duzina;i++){
+        char rec[15]="";
+        if(isspace(str[i]) && i<duzina){
+            i++;
+        }
+        while(!isspace(str[i]) && i<duzina){
+            strncat(rec,&str[i],1);
+            i++;
+        }
+        int broj_ponavljanja_za_rec=0;
+        for(j=0;j<duzina;j++){
+            char rec2[15]="";
+            if(isspace(str[j])&& j<duzina){
+                j++;
+            }
+            while(!isspace(str[j]) && j<duzina){
+                strncat(rec2,&str[j],1);
+                j++;
+            }
+            if(strcmp(rec,rec2)==0){
+                broj_ponavljanja_za_rec++;
+            }
+        }
+        if(broj_ponavljanja_za_rec<najmanje){
+            najmanje=broj_ponavljanja_za_rec;
+        }
+    }
+    for(i=0;i<duzina;i++){
+            char rec[15]="";
+            if(isspace(str[i]) && i<duzina){
+                i++;
+            }
+            while(!isspace(str[i]) && i<duzina){
+                strncat(rec,&str[i],1);
+                i++;
+            }
+            int broj_ponavljanja_za_rec=0;
+            for(j=0;j<duzina;j++){
+                char rec2[15]="";
+                if(isspace(str[j])&& j<duzina){
+                    j++;
+                }
+                while(!isspace(str[j]) && j<duzina){
+                    strncat(rec2,&str[j],1);
+                    j++;
+                }
+                if(strcmp(rec,rec2)==0){
+                    broj_ponavljanja_za_rec++;
+                }
+            }
+            if(broj_ponavljanja_za_rec!=najmanje){
+                strcat(novistring,rec);
+                strcat(novistring," ");
+
+            }
+    }
+puts(novistring);
+return 0;
+}
+*/
+/*
+UUP-KLK2-2021-G1;
+ne znam
+*/
+/*
+UUP-KLK2-1920 G4
+
+MORAM DA FIX JEDNU LOGIKU OVDE IMA GRESKICA AL BICE OK
+amjZdghAshZfgh
+test primer;
+
+int main(){
+    char str[10000];
+    fgets(str,sizeof(str),stdin);
+    int i,j;
+    int duzina=strlen(str);
+    int najduza=0;
+    for(i=0;i<duzina;i++){
+        char rec[15]="";
+        j=i+1;
+        strncat(rec,&str[i],1);
+        while(j){
+            strncat(rec,&str[j],1);
+            j++;
+            if(str[i]==str[j] || str[i]==str[j]+32 || str[i]==str[j]-32){
+                strncat(rec,&str[j],1);
+                printf("%s\n",rec);
+                printf("%d",strlen(rec));
+            }
+            if(j>=duzina){
+                rec[0]='\0';
+                break;
+            }
+        }
+        printf("%s\n",rec);
+        if(strlen(rec)>najduza){
+            najduza=strlen(rec);
+        }
+    }
+return 0;
+}
+*/
+/*
+UUP-KLK2-1920 G3
+OVO je prelep zadatak povraca mi se uradjen skroz
+
+int main(){
+char str[10000];
+    fgets(str,sizeof(str),stdin);
+    int najvise=1;
+    int broj_pojavljivalja=0;
+    int i,j;
+    int duzina=strlen(str);
+    char novistring[100]="";
+    char rec[50]="";
+    char novarec[50]="";
+    for(i=0;i<duzina;i++){
+        char rec[50]="";
+        char novarec[50]="";
+        int najmanje_za_rec=100;
+
+        if(isspace(str[i]) && i<duzina){
+            i++;
+        }
+        while(!isspace(str[i])){
+            strncat(rec,&str[i],1);
+            i++;
+        }
+        for(j=0;j<strlen(rec);j++){
+            int rastojanje=0;
+
+            ///kjloijk
+            for(int z=j+1;z<strlen(rec);z++){
+
+                if(rec[j]!=rec[z]){
+                    rastojanje++;
+                }
+                else{
+                    if(rastojanje<najmanje_za_rec){
+                        najmanje_za_rec=rastojanje;
+                    }
+                }
+            }
+
+
+        }
+        if(najmanje_za_rec==100){
+            continue;
+        }
+        else{
+        printf("%s - %d \n",rec, najmanje_za_rec);
+        }
+    }
+
+
+
+return 0;
+}
+*/
+/*
+UPP-KLK2-1920 G2
+
+int main(){
+    char str[10000];
+    fgets(str,sizeof(str),stdin);
+    int najvise=1;
+    int broj_pojavljivalja=0;
+    int i,j;
+    int duzina=strlen(str);
+    char novistring[100]="";
+    char rec[50]="";
+    char novarec[50]="";
+    for(i=0;i<duzina;i++){
+
+
+        if(isspace(str[i]) && i<duzina){
+            i++;
+        }
+        while(!isspace(str[i])){
+            if((str[i]=='l'||str[i]=='n' ) && str[i+1]=='j'){
+                strncat(rec,&str[i],1);
+                i=i+2;
+            }
+            else{
+                strncat(rec,&str[i],1);
+                i++;
+            }
+
+
+        }
+
+
+    }
+    for(j=0;j<strlen(rec);j++){
+        strncat(novarec,&rec[strlen(rec)-1-j],1);
+    }
+    if(strcmp(novarec,rec)==0){
+        printf("Jeste palindrom");
+    }
+    else{
+        printf("Nije palindrom");
+    }
+
+return 0;
+}
+
+*/
+/*
+UPP-KLK2-1920 G1
+
+int main(){
+    char str[10000];
+    fgets(str,sizeof(str),stdin);
+    int najvise=1;
+    int broj_pojavljivalja=0;
+    int i,j;
+    int duzina=strlen(str);
+    char novistring[100]="";
+    for(i=0;i<duzina;i++){
+        char rec[15]="";
+        char novarec[15]="";
+        if(isspace(str[i]) && i<duzina){
+            i++;
+        }
+        while(!isspace(str[i])){
+            strncat(rec,&str[i],1);
+            i++;
+        }
+        for(j=0;j<strlen(rec);j++){
+            strncat(novarec,&rec[strlen(rec)-1-j],1);
+        }
+        if(strcmp(rec,novarec)==0){
+            strcat(novistring,rec);
+            strcat(novistring," ");
+        }
+        else{
+            strcat(novistring,novarec);
+            strcat(novistring," ");
+        }
+    }
+    puts(novistring);
+return 0;
+}
+*/
+/*
+UPP-KLK2-1819 G4
+
+int main(){
+    char str[10000];
+    fgets(str,sizeof(str),stdin);
+
+    int i,j;
+    int duzina=strlen(str);
+    char novistring[100]="";
+    int najcesce_pojavljivanje=0;
+    int broj_koji_se_najcesce=0;
+    for(i=0;i<duzina;i++){
+        int broj_pojavljivanja=0;
+        char rec[15]="";
+        int zbir=0;
+        char novarec[15]="";
+        if(str[i]=='-' && i<duzina){
+            i++;
+        }
+        while((str[i]!='-' && str[i]!='\n' && str[i]!='\0') && i<duzina){
+            zbir=str[i]-'0'+zbir;
+            strncat(rec,&str[i],1);
+            i++;
+        }
+        for(j=0;j<duzina;j++){
+                int zbir2=0;
+            if(str[j]=='-'&& j<duzina){
+                j++;
+            }
+            while((str[j]!='-' && str[j]!='\n' && str[j]!='\0') && j<duzina){
+                zbir2=str[j]-'0'+zbir2;
+                j++;
+            }
+            if(zbir2==zbir){
+                broj_pojavljivanja++;
+            }
+        }
+        if(broj_pojavljivanja>najcesce_pojavljivanje){
+            najcesce_pojavljivanje=broj_pojavljivanja;
+            broj_koji_se_najcesce=zbir;
+        }
+    }
+    for(i=0;i<duzina;i++){
+        char rec[10]="";
+        int zbir=0;
+        if(str[i]=='-' || str[i]=='\n' && i<duzina){
+            i++;
+        }
+        while((str[i]!='-' && str[i]!='\n' && str[i]!='\0') && i<duzina){
+            zbir=str[i]-'0'+zbir;
+            strncat(rec,&str[i],1);
+            i++;
+        }
+        if(zbir==broj_koji_se_najcesce){
+            strcat(novistring,rec);
+            strcat(novistring," ");
+        }
+    }
+    printf("Zbir %d,%s",broj_koji_se_najcesce,novistring);
+return 0;
+}
+*/
+/*
+UUP-KLK2-1819-G3
+
+int main(){
+    char str[10000];
+    fgets(str,sizeof(str),stdin);
+    int najvise=1;
+    int broj_pojavljivalja=0;
+    int i,j;
+    int duzina=strlen(str);
+    char novistring[100]="";
+    for(i=0;i<duzina;i++){
+        char rec[15]="";
+        char novarec[15]="";
+        if(isspace(str[i]) && i<duzina){
+            i++;
+        }
+        while(!isspace(str[i])){
+            strncat(rec,&str[i],1);
+            i++;
+        }
+        if(strlen(rec)%2==1){
+            for(j=0;j<strlen(rec);j++){
+                strncat(novarec,&rec[strlen(rec)-1-j],1);
+            }
+            strcat(novistring,novarec);
+            strcat(novistring, " ");
+        }
+        else{
+            strcat(novistring,rec);
+            strcat(novistring, " ");
+        }
+    }
+    puts(novistring);
+return 0;
+}
+*/
+/*
+UUP-KLK2-1819-G2
+
+int main(){
+    char str[10000];
+    fgets(str,sizeof(str),stdin);
+    int najvise=1;
+    int broj_pojavljivalja=0;
+    int i,j;
+    int duzina=strlen(str);
+    char novistring[100]="";
+    for(i=0;i<duzina;i++){
+        char rec[15]="";
+        char novarec[15]="";
+        if(isspace(str[i]) && i<duzina){
+            i++;
+        }
+        while(!isspace(str[i])){
+            strncat(rec,&str[i],1);
+            i++;
+        }
+        broj_pojavljivalja=0;
+        if(rec[0]=='\"' && rec[strlen(rec)-1]=='\"'){
+            for(j=0;j<strlen(rec);j++){
+                if(rec[j]=='a' || rec[j]=='e' || rec[j]=='i' || rec[j]=='o' || rec[j]=='u' || rec[j]=='A' || rec[j]=='E' || rec[j]=='I' || rec[j]=='O' || rec[j]=='a' ){
+                    strncat(novarec,&rec[j],1);
+                }
+            }
+            strcat(novistring,novarec);
+            strcat(novistring," ");
+        }
+        else{
+            strcat(novistring,rec);
+            strcat(novistring," ");
+        }
+
+    }
+    puts(novistring);
+return 0;
+}
+*/
+/*
+UUP-KLK2-1819-G1
+
+int main(){
+    char str[10000];
+    fgets(str,sizeof(str),stdin);
+    int najvise=1;
+    int broj_pojavljivalja=0;
+    int i,j;
+    int duzina=strlen(str);
+    char rec_najvise[100]="";
+    for(i=0;i<duzina;i++){
+        char rec[15]="";
+        if(isspace(str[i]) && i<duzina){
+            i++;
+        }
+        while(!isspace(str[i])){
+            strncat(rec,&str[i],1);
+            i++;
+        }
+        broj_pojavljivalja=0;
+        for(j=0;j<duzina;j++){
+            char rec2[15]="";
+            if(isspace(str[j])&& j<duzina){
+                j++;
+            }
+            while(!isspace(str[j])){
+                strncat(rec2,&str[j],1);
+                j++;
+            }
+            if(strcmp(rec,rec2)==0){
+                broj_pojavljivalja++;
+            }
+        }
+        if(broj_pojavljivalja>najvise){
+            najvise=broj_pojavljivalja;
+            strcpy(rec_najvise,rec);
+        }
+    }
+    printf("%s  %d",rec_najvise,najvise);
+return 0;
+}
+*/
+/*
+UUP-KLK2-1718-G4 Kida zad nego kao nes sam zajebo msm znam st aje al kao mrzi me da smislim resenje
+ono kao na kraj samo neki uslov treba da se obrise glupa crtica uvek i nesto da resi crticu posle one reci
+aaaaa neeee imam ideju uzems samo na kraj kreces od zadnje do levo kao i brises sve crtice koje su na kraj i trebalo bi d aresi problem
+*/
+
+int main(){
+    char str[100];
+    fgets(str,sizeof(str),stdin);
+    int duzina=strlen(str);
+    char novistr[100]= "";
+    int gas=0;
+    int i,j;
+    for(i=0;i<duzina;i++){
+        char rec[15]="";
+        char novarec[15]="";
+        if(str[i]=='-' && i<duzina){
+            i++;
+        }
+        while(str[i]!='-' && i<duzina){
+            strncat(rec,&str[i],1);
+            i++;
+        }
+       for(j=0;j<strlen(rec);j++){
+            int brojac_slova=0;
+            for(int z=0;z<strlen(rec);z++){
+                if(rec[j]==rec[z]){
+                    brojac_slova++;
+                }
+            }
+            if(brojac_slova>1){
+                if(strchr(novarec,rec[j])!=0){
+
+                }
+                else{
+                    strncat(novarec,&rec[j],1);
+                }
+
+            }
+        }
+        strcat(novistr,novarec);
+        strcat(novistr,"-");
+    }
+
+puts(novistr);
+return 0;
+}
+
+/*
+UUP-KLK2-1718-G3
+Stringovi
+
+int main(){
+    char str[100];
+    fgets(str,sizeof(str),stdin);
+    int duzina=strlen(str);
+    char novistr[100]="";
+
+    int i,j;
+    for(i=0;i<duzina;i++){
+        char rec[15] = "";
+        char novarec[15] = "";
+        while(i<duzina && str[i]!='-'){
+            strncat(rec,&str[i],1);
+            i++;
+        }
+        for(j=0;j<strlen(rec);j++){
+            if(!strchr(novarec, rec[j])){
+                strncat(novarec,&rec[j],1);
+            }
+        }
+        strcat(novistr,novarec);
+        if(i<duzina){
+            strcat(novistr,"-");
+        }
+    }
+    puts(novistr);
+return 0;
+}
+*/
+/*
+UUP-KLK2-1718-G2
+Stringovi Isti ko G1
+*/
+
+/*
+UUP-KLK2-1718-G1
+Stringovi
+
+int main(){
+    char str[100];
+    fgets(str,sizeof(str),stdin);
+    int duzina=strlen(str);
+    int i;
+    char novi_string[100]="";
+
+    for(i=0;i<duzina;i++){
+        char rec[10]="";
+        if(str[i]==' ' && i<duzina){
+            i++;
+        }
+        int broj_ponavljanja=0;
+            while(str[i]!=' ' && str[i]!=' \n' && i<duzina){
+                strncat(rec,&str[i],1);
+                i++;
+            }
+            for(int j=0;j<duzina;j++){
+                char provera[10]="";
+                if(str[j]==' '){
+                    j++;
+                }
+                while(str[j]!=' '&& str[j]!= '\n' && j<duzina){
+                    strncat(provera,&str[j],1);
+                    j++;
+                }
+                if(strcmp(rec,provera)==0){
+                    broj_ponavljanja++;
+                }
+            }
+            if(broj_ponavljanja>1 && !strstr(novi_string, rec)){
+                strcat(novi_string,rec);
+                strcat(novi_string," ");
+            }
+
+    }
+    puts(novi_string);
+return 0;
+}
+*/
+/*
+UUP-KLK2-1617-G4
+
+int main(){
+    char str[100];
+    fgets(str,sizeof(str),stdin);
+    int i,j;
+    int duzina=strlen(str);
+    char novistr[100]="";
+    for(i=0;i<duzina;i++){
+        char rec[15]="";
+        char novaRIJEEEC[15]="";
+        if(str[i]=='-' && i<duzina && str[i]=='\n'){
+            i++;
+        }
+        while(str[i]!='-' && i<duzina && str[i]!='\n'){
+            strncat(rec,&str[i],1);
+            i++;
+        }
+        int duzina2 = strlen(rec);
+
+
+        for (j = 0; j < duzina2; j++) {
+            if(j==duzina2-1){
+                novaRIJEEEC[j]=rec[0];
+            }
+            else{
+                novaRIJEEEC[j]=rec[j+1];
+            }
+        }
+        strcat(novistr,novaRIJEEEC);
+        if(i<duzina-1){
+        strcat(novistr,"-");
+        }
+    }
+
+    puts(novistr);
+    return 0;
+}
+*/
+/*
+UUP-KLK2-1617-G3
+int main(){
+    char str[100];
+    fgets(str,sizeof(str),stdin);
+    int i,j;
+    int duzina=strlen(str);
+    char novistr[100]="";
+    for(i=0;i<duzina;i++){
+        char rec[15]="";
+        char novaRIJEEEC[15]="";
+        if(str[i]=='-' && i<duzina && str[i]=='\n'){
+            i++;
+        }
+        while(str[i]!='-' && i<duzina && str[i]!='\n'){
+            strncat(rec,&str[i],1);
+            i++;
+        }
+        int duzina2 = strlen(rec);
+
+
+        for (j = 0; j < duzina2; j++) {
+            novaRIJEEEC[j] = rec[(j + 1) % duzina2];
+        }
+        strcat(novistr,novaRIJEEEC);
+        if(i<duzina-1){
+        strcat(novistr,"-");
+        }
+    }
+
+    puts(novistr);
+    return 0;
+}
+*/
+/*
+UUP-KLK2-1617-G2
+
+int main(){
+    char str[100];
+    int n;
+    scanf("%d\n",&n);
+
+    fgets(str,sizeof(str),stdin);
+    int duzina=strlen(str);
+    char novistr[100]="";
+    for(int i=0;i<duzina;i++){
+        char rec[20]="";
+        if(isspace(str[i]) && i<duzina){
+            i++;
+        }
+        while(!isspace(str[i]) && i<duzina){
+            strncat(rec,&str[i],1);
+            i++;
+        }
+        if(strlen(rec)<n){
+            continue;
+        }
+        strcat(novistr,rec);
+        strcat(novistr," ");
+    }
+puts(novistr);
+return 0;
+}
+*/
+/*
+UUP-KLK2-1617-G1
+
+int main(){
+    char str[100];
+    fgets(str,sizeof(str),stdin);
+    int duzina=strlen(str);
+    char novistr[100]="";
+    for(int i=0;i<duzina;i++){
+        char rec[20]="";
+        if(isspace(str[i]) && i<duzina){
+            i++;
+        }
+        while(!isspace(str[i]) && i<duzina){
+            strncat(rec,&str[i],1);
+            i++;
+        }
+        if(rec[0]>='a'&& rec[0]<='z' && rec[strlen(rec)-1]>='a' && rec[strlen(rec)-1]<='z'){
+            continue;
+        }
+        strcat(novistr,rec);
+        strcat(novistr," ");
+    }
+    printf("%s",novistr);
+
+
+return 0;
+}
+*/
